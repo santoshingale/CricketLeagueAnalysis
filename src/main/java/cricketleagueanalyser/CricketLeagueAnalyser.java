@@ -42,4 +42,13 @@ public class CricketLeagueAnalyser {
         Collections.reverse(sortedRunList);
         return sortedRunList;
     }
+
+    public List<IPLRunsCSV> getTopCricketorsStrikingRates() {
+        List<IPLRunsCSV> sortedStrikingRatesList = iplCricketorsRunList.stream()
+                .sorted(Comparator.comparing(result -> result.strikeRate))
+                .collect(Collectors.toList());
+        Collections.reverse(sortedStrikingRatesList);
+        return sortedStrikingRatesList;
+
+    }
 }
