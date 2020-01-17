@@ -51,4 +51,12 @@ public class CricketLeagueAnalyser {
         return sortedStrikingRatesList;
 
     }
+
+    public List<IPLRunsCSV> getCricketorsWhoHitMaxSixFours() {
+        List<IPLRunsCSV> sortedSixAndFourList = iplCricketorsRunList.stream()
+                .sorted(Comparator.comparing(result -> (result.sixs * 6 + result.fours * 4 )))
+                .collect(Collectors.toList());
+        Collections.reverse(sortedSixAndFourList);
+        return sortedSixAndFourList;
+    }
 }
