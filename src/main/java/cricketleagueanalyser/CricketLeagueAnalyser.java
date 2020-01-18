@@ -17,27 +17,26 @@ import java.util.stream.Collectors;
 
 public class CricketLeagueAnalyser {
 
-    private HashMap<String, Comparator<IPLRunsCSV>> sortField = null;
-    List<IPLRunsCSV> iplCricketorsRunList = null;
+    private HashMap<SortingField, Comparator<BatsmanDAO>> sortField = null;
+    List<BatsmanDAO> iplCricketorsRunList = null;
 
     public CricketLeagueAnalyser() {
 
         this.sortField = new HashMap<>();
-        this.sortField.put("average", Comparator.comparing(result -> result.avg));
-        this.sortField.put("strikeRate", Comparator.comparing(result -> result.strikeRate));
-        this.sortField.put("max4s6s", Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4 )));
-       /* this.sortField.put("strikeWith4s6s");
-        this.sortField.put("greatAvgWithstrikeRate",)*/
+        this.sortField.put(SortingField.AVEREGE, Comparator.comparing(result -> result.avg));
+        this.sortField.put(SortingField.STIKE_RATE, Comparator.comparing(result -> result.strikeRate));
+        this.sortField.put(SortingField.MAX_6S_4S, Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4)));
+       // this.sortField.put(SortingField.MAX_STIKE_6S_4S, Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4)).thenComparing(BatsmanDAO :: getStrikeRate));
     }
 
     public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            iplCricketorsRunList = csvBuilder.getListCSVFile(reader, IPLRunsCSV.class);
+            iplCricketorsRunList = csvBuilder.getListCSVFile(reader, BatsmanDAO.class);
             return iplCricketorsRunList.size();
         } catch (IOException e) {
             throw new CricketLeagueException(e.getMessage(),
-                    CricketLeagueException.ExceptionType.IPL_FILE_PROBLEM);
+                    CricketLeagueException.ExceptionType.FILE_PROBLEM);
         } catch (RuntimeException e) {
             throw new CricketLeagueException(e.getMessage(),
                     CricketLeagueException.ExceptionType.INCORRECT_FILE_DATA);
@@ -47,30 +46,12 @@ public class CricketLeagueAnalyser {
         return 0;
     }
 
-    public List<IPLRunsCSV> getSortedArrayByDESCOrder(String fieldName) {
+    public List<BatsmanDAO> getSortedDataByDESCOrder(SortingField fieldSortingField) {
         iplCricketorsRunList = iplCricketorsRunList.stream()
-                .sorted(sortField.get(fieldName))
+                .sorted(sortField.get(fieldSortingField))
                 .collect(Collectors.toList());
         Collections.reverse(iplCricketorsRunList);
+        iplCricketorsRunList.forEach(System.out::println);
         return this.iplCricketorsRunList;
-    }
-
-    public List<IPLRunsCSV> getTopCricketorsAverageScore() {
-        return this.getSortedArrayByDESCOrder("average");
-    }
-
-    public List<IPLRunsCSV> getTopCricketorsStrikingRates() {
-        return this.getSortedArrayByDESCOrder("strikeRate");
-
-    }
-
-    public List<IPLRunsCSV> getCricketorsWhoHitMaxSixFours() {
-        return this.getSortedArrayByDESCOrder("max4s6s");
-    }
-
-    public List<IPLRunsCSV> getPlayerWithMaxStrikeRateSixAndFour() {
-        iplCricketorsRunList = this.getSortedArrayByDESCOrder("strikeRate");
-        Collections.reverse(iplCricketorsRunList);
-        return this.getSortedArrayByDESCOrder("max4s6s");
     }
 }

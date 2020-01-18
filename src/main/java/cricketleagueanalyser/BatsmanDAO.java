@@ -2,7 +2,7 @@ package cricketleagueanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IPLRunsCSV {
+public class BatsmanDAO {
 
     @CsvBindByName(column = "POS", required = true)
     public int pos;
@@ -45,6 +45,10 @@ public class IPLRunsCSV {
 
     @CsvBindByName(column = "6s", required = true)
     public int sixes;
+
+    public Double getStrikeRate() {
+        return strikeRate;
+    }
 
     @Override
     public String toString() {

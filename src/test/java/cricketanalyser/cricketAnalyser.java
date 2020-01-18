@@ -2,7 +2,8 @@ package cricketanalyser;
 
 import cricketleagueanalyser.CricketLeagueAnalyser;
 import cricketleagueanalyser.CricketLeagueException;
-import cricketleagueanalyser.IPLRunsCSV;
+import cricketleagueanalyser.BatsmanDAO;
+import cricketleagueanalyser.SortingField;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +12,6 @@ import java.util.List;
 public class cricketAnalyser {
 
     private static final String IPL_2019_FACTSHEET_MOST_RUNS = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
-    private static final String IPL_2019_FACTSHEET_MOST_WKTS = "./src/test/resources/IPL2019FactsheetMostWkts.csv";
 
     @Test
     public void givenIPL2019Sheet_shouldReturnRecordsCount() {
@@ -29,7 +29,7 @@ public class cricketAnalyser {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
-            List<IPLRunsCSV> topCricketorsAverageScorelist = cricketLeagueAnalyser.getTopCricketorsAverageScore();
+            List<BatsmanDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.AVEREGE);
             Assert.assertEquals(83.2, topCricketorsAverageScorelist.get(0).avg, 0);
             Assert.assertEquals(0, topCricketorsAverageScorelist.get(99).avg, 0);
         } catch (CricketLeagueException e) {
@@ -42,7 +42,7 @@ public class cricketAnalyser {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
-            List<IPLRunsCSV> topCricketorsStrikingRateslist = cricketLeagueAnalyser.getTopCricketorsStrikingRates();
+            List<BatsmanDAO> topCricketorsStrikingRateslist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.STIKE_RATE);
             Assert.assertEquals(333.33, topCricketorsStrikingRateslist.get(0).strikeRate, 0);
             Assert.assertEquals(63.15, topCricketorsStrikingRateslist.get(99).strikeRate, 0);
         } catch (CricketLeagueException e) {
@@ -55,7 +55,7 @@ public class cricketAnalyser {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
-            List<IPLRunsCSV> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getCricketorsWhoHitMaxSixFours();
+            List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.MAX_6S_4S);
             Assert.assertEquals("Andre Russell", cricketorsSixAndFourWiselist.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", cricketorsSixAndFourWiselist.get(99).player);
         } catch (CricketLeagueException e) {
@@ -68,13 +68,11 @@ public class cricketAnalyser {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
-            List<IPLRunsCSV> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getPlayerWithMaxStrikeRateSixAndFour();
+            List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.MAX_STIKE_6S_4S);
             Assert.assertEquals("Andre Russell", cricketorsSixAndFourWiselist.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", cricketorsSixAndFourWiselist.get(99).player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }
     }
-
-
 }
