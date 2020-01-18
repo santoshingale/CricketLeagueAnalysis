@@ -10,16 +10,24 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 public class CricketLeagueAnalyser {
 
+    private HashMap<String, Comparator<IPLRunsCSV>> sortField = null;
     List<IPLRunsCSV> iplCricketorsRunList = null;
 
     public CricketLeagueAnalyser() {
 
+        this.sortField = new HashMap<>();
+        this.sortField.put("average", Comparator.comparing(result -> result.avg));
+        this.sortField.put("strikeRate", Comparator.comparing(result -> result.strikeRate));
+        this.sortField.put("max4s6s", Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4 )));
+       /* this.sortField.put("strikeWith4s6s");
+        this.sortField.put("greatAvgWithstrikeRate",)*/
     }
 
     public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {
@@ -39,38 +47,30 @@ public class CricketLeagueAnalyser {
         return 0;
     }
 
-    public List<IPLRunsCSV> getTopCricketorsAverageScore() {
-        List<IPLRunsCSV> sortedRunList = iplCricketorsRunList.stream()
-                .sorted(Comparator.comparing(result -> result.avg))
+    public List<IPLRunsCSV> getSortedArrayByDESCOrder(String fieldName) {
+        iplCricketorsRunList = iplCricketorsRunList.stream()
+                .sorted(sortField.get(fieldName))
                 .collect(Collectors.toList());
-        Collections.reverse(sortedRunList);
-        return sortedRunList;
+        Collections.reverse(iplCricketorsRunList);
+        return this.iplCricketorsRunList;
+    }
+
+    public List<IPLRunsCSV> getTopCricketorsAverageScore() {
+        return this.getSortedArrayByDESCOrder("average");
     }
 
     public List<IPLRunsCSV> getTopCricketorsStrikingRates() {
-        List<IPLRunsCSV> sortedStrikingRatesList = iplCricketorsRunList.stream()
-                .sorted(Comparator.comparing(result -> result.strikeRate))
-                .collect(Collectors.toList());
-        Collections.reverse(sortedStrikingRatesList);
-        return sortedStrikingRatesList;
+        return this.getSortedArrayByDESCOrder("strikeRate");
 
     }
 
     public List<IPLRunsCSV> getCricketorsWhoHitMaxSixFours() {
-        List<IPLRunsCSV> sortedSixAndFourList = iplCricketorsRunList.stream()
-                .sorted(Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4 )))
-                .collect(Collectors.toList());
-        Collections.reverse(sortedSixAndFourList);
-        return sortedSixAndFourList;
+        return this.getSortedArrayByDESCOrder("max4s6s");
     }
 
     public List<IPLRunsCSV> getPlayerWithMaxStrikeRateSixAndFour() {
-        List<IPLRunsCSV> sortedSixAndFourList = iplCricketorsRunList.stream()
-                .sorted(Comparator.comparing(result -> result.strikeRate))
-                .sorted(Comparator.comparing(result -> ((result.sixes * 6 + result.fours * 4 ))))
-                .collect(Collectors.toList());
-        Collections.reverse(sortedSixAndFourList);
-        sortedSixAndFourList.forEach(System.out::println);
-        return sortedSixAndFourList;
+        iplCricketorsRunList = this.getSortedArrayByDESCOrder("strikeRate");
+        Collections.reverse(iplCricketorsRunList);
+        return this.getSortedArrayByDESCOrder("max4s6s");
     }
 }
