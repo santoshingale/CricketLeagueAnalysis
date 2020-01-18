@@ -62,4 +62,17 @@ public class cricketAnalyser {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPL2019Sheet_shouldReturnCricketorsWhoHadMaxStrikeRateWithSixAndFourInIPL2019() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
+            List<IPLRunsCSV> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getPlayerWithMaxStrikeRateSixAndFour();
+            Assert.assertEquals("Andre Russell", cricketorsSixAndFourWiselist.get(0).player);
+            Assert.assertEquals("Shakib Al Hasan", cricketorsSixAndFourWiselist.get(99).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -44,7 +44,7 @@ public class IPLRunsCSV {
     public int fours;
 
     @CsvBindByName(column = "6s", required = true)
-    public int sixs;
+    public int sixes;
 
     @Override
     public String toString() {
@@ -62,7 +62,7 @@ public class IPLRunsCSV {
                 ", century=" + century +
                 ", halfCentury=" + halfCentury +
                 ", fours=" + fours +
-                ", sixs=" + sixs +
+                ", sixs=" + sixes +
                 '}';
     }
 }

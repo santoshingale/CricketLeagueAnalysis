@@ -18,6 +18,10 @@ public class CricketLeagueAnalyser {
 
     List<IPLRunsCSV> iplCricketorsRunList = null;
 
+    public CricketLeagueAnalyser() {
+
+    }
+
     public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
@@ -54,9 +58,19 @@ public class CricketLeagueAnalyser {
 
     public List<IPLRunsCSV> getCricketorsWhoHitMaxSixFours() {
         List<IPLRunsCSV> sortedSixAndFourList = iplCricketorsRunList.stream()
-                .sorted(Comparator.comparing(result -> (result.sixs * 6 + result.fours * 4 )))
+                .sorted(Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4 )))
                 .collect(Collectors.toList());
         Collections.reverse(sortedSixAndFourList);
+        return sortedSixAndFourList;
+    }
+
+    public List<IPLRunsCSV> getPlayerWithMaxStrikeRateSixAndFour() {
+        List<IPLRunsCSV> sortedSixAndFourList = iplCricketorsRunList.stream()
+                .sorted(Comparator.comparing(result -> result.strikeRate))
+                .sorted(Comparator.comparing(result -> ((result.sixes * 6 + result.fours * 4 ))))
+                .collect(Collectors.toList());
+        Collections.reverse(sortedSixAndFourList);
+        sortedSixAndFourList.forEach(System.out::println);
         return sortedSixAndFourList;
     }
 }
