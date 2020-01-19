@@ -25,7 +25,7 @@ public class cricketAnalyser {
     }
 
     @Test
-    public void givenIPL2019Sheet_shouldReturnAverageOfCricketorsWhoPlayedIPL2019() {
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByAverage() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
@@ -38,11 +38,11 @@ public class cricketAnalyser {
     }
 
     @Test
-    public void givenIPL2019Sheet_shouldReturnStrikingRatesOfCricketorsWhoPlayedIPL2019() {
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByStrikingRates() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
-            List<BatsmanDAO> topCricketorsStrikingRateslist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.STIKE_RATE);
+            List<BatsmanDAO> topCricketorsStrikingRateslist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.STRIKE_RATE);
             Assert.assertEquals(333.33, topCricketorsStrikingRateslist.get(0).strikeRate, 0);
             Assert.assertEquals(63.15, topCricketorsStrikingRateslist.get(99).strikeRate, 0);
         } catch (CricketLeagueException e) {
@@ -51,7 +51,7 @@ public class cricketAnalyser {
     }
 
     @Test
-    public void givenIPL2019Sheet_shouldReturnCricketorsWhoScoreMaxSixAndFourInIPL2019() {
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByMaxSixAndFour() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
@@ -64,13 +64,26 @@ public class cricketAnalyser {
     }
 
     @Test
-    public void givenIPL2019Sheet_shouldReturnCricketorsWhoHadMaxStrikeRateWithSixAndFourInIPL2019() {
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByMaxStrikeRateWithSixAndFour() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
             List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.MAX_STIKE_6S_4S);
             Assert.assertEquals("Andre Russell", cricketorsSixAndFourWiselist.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", cricketorsSixAndFourWiselist.get(99).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByAverageAndStrikeRate() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
+            List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.GREAT_AVEREGE_STRIKE_RATE);
+            Assert.assertEquals("MS Dhoni", cricketorsSixAndFourWiselist.get(0).player);
+            Assert.assertEquals("Tim Southee", cricketorsSixAndFourWiselist.get(99).player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }

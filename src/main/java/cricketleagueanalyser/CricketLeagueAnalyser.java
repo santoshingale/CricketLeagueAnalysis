@@ -23,10 +23,11 @@ public class CricketLeagueAnalyser {
     public CricketLeagueAnalyser() {
 
         this.sortField = new HashMap<>();
-        this.sortField.put(SortingField.AVEREGE, Comparator.comparing(result -> result.avg));
-        this.sortField.put(SortingField.STIKE_RATE, Comparator.comparing(result -> result.strikeRate));
-        this.sortField.put(SortingField.MAX_6S_4S, Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4)));
-       // this.sortField.put(SortingField.MAX_STIKE_6S_4S, Comparator.comparing(result -> (result.sixes * 6 + result.fours * 4)).thenComparing(BatsmanDAO :: getStrikeRate));
+        this.sortField.put(SortingField.AVEREGE, Comparator.comparing(batsmanDAO -> batsmanDAO.avg));
+        this.sortField.put(SortingField.STRIKE_RATE, Comparator.comparing(batsmanDAO -> batsmanDAO.strikeRate));
+        this.sortField.put(SortingField.MAX_6S_4S, Comparator.comparing(batsmanDAO -> (batsmanDAO.sixes * 6 + batsmanDAO.fours * 4)));
+        this.sortField.put(SortingField.MAX_STIKE_6S_4S, sortField.get(SortingField.MAX_6S_4S).thenComparing(batsmanDAO -> batsmanDAO.strikeRate));
+        this.sortField.put(SortingField.GREAT_AVEREGE_STRIKE_RATE, sortField.get(SortingField.AVEREGE).thenComparing(batsmanDAO -> batsmanDAO.strikeRate));
     }
 
     public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {

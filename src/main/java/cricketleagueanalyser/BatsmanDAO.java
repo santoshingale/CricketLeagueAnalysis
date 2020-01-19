@@ -46,9 +46,6 @@ public class BatsmanDAO {
     @CsvBindByName(column = "6s", required = true)
     public int sixes;
 
-    public Double getStrikeRate() {
-        return strikeRate;
-    }
 
     @Override
     public String toString() {
