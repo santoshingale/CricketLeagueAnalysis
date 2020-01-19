@@ -5,7 +5,7 @@ public class CricketLeagueException extends Exception {
     ExceptionType type;
 
     enum ExceptionType {
-        FILE_PROBLEM, INCORRECT_FILE_DATA, NO_IPL_DATA
+        FILE_PROBLEM, INCORRECT_FILE_DATA;
     }
 
     public CricketLeagueException(String message, ExceptionType type) {
