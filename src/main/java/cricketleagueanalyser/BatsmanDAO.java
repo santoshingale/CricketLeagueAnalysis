@@ -46,7 +46,6 @@ public class BatsmanDAO {
     @CsvBindByName(column = "6s", required = true)
     public int sixes;
 
-
     @Override
     public String toString() {
         return "IPLRunsCSV{" +
