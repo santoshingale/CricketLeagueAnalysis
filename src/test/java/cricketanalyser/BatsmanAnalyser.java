@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class cricketAnalyser {
+public class BatsmanAnalyser {
 
     private static final String IPL_2019_FACTSHEET_MOST_RUNS = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
 
@@ -77,12 +77,38 @@ public class cricketAnalyser {
     }
 
     @Test
-    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByAverageAndStrikeRate() {
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByAverageWithStrikeRate() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
             List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.GREAT_AVEREGE_STRIKE_RATE);
             Assert.assertEquals("MS Dhoni", cricketorsSixAndFourWiselist.get(0).player);
+            Assert.assertEquals("Tim Southee", cricketorsSixAndFourWiselist.get(99).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPL2019Sheet_shouldReturnListOfBatsmanByMaxRunWithAverage() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
+            List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.MAX_RUN_AVERAGE);
+            Assert.assertEquals("David Warner", cricketorsSixAndFourWiselist.get(0).player);
+            Assert.assertEquals("Tim Southee", cricketorsSixAndFourWiselist.get(99).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPL2019Sheet_shouldReturnListOfBowlerByAverage() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadCricketCSVFile(IPL_2019_FACTSHEET_MOST_RUNS);
+            List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.MAX_RUN_AVERAGE);
+            Assert.assertEquals("David Warner", cricketorsSixAndFourWiselist.get(0).player);
             Assert.assertEquals("Tim Southee", cricketorsSixAndFourWiselist.get(99).player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();

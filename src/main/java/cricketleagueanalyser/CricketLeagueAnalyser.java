@@ -16,6 +16,11 @@ public class CricketLeagueAnalyser {
         return iplCricketorsRunList.size();
     }
 
+    public int loadBowlerCSVFile(String csvFilePath) throws CricketLeagueException {
+        iplCricketorsRunList = CricketLeagueAdapter.loadCricketData(csvFilePath);
+        return iplCricketorsRunList.size();
+    }
+
     public List<BatsmanDAO> getSortedDataByDESCOrder(SortingField.Field fieldSortingField) {
         iplCricketorsRunList = iplCricketorsRunList.stream()
                 .sorted(new SortingField().getSortingField(fieldSortingField))
