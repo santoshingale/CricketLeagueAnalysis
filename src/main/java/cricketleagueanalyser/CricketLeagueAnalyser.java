@@ -20,10 +20,12 @@ public class CricketLeagueAnalyser {
         this.sortField.put(SortingField.MAX_6S_4S, Comparator.comparing(batsmanDAO -> (batsmanDAO.sixes * 6 + batsmanDAO.fours * 4)));
         this.sortField.put(SortingField.MAX_STIKE_6S_4S, sortField.get(SortingField.MAX_6S_4S).thenComparing(batsmanDAO -> batsmanDAO.strikeRate));
         this.sortField.put(SortingField.GREAT_AVEREGE_STRIKE_RATE, sortField.get(SortingField.AVEREGE).thenComparing(batsmanDAO -> batsmanDAO.strikeRate));
+        this.sortField.put(SortingField.MAX_RUN, Comparator.comparing(batsmanDAO -> batsmanDAO.runs));
+        this.sortField.put(SortingField.MAX_RUN_AVERAGE, sortField.get(SortingField.MAX_RUN).thenComparing(batsmanDAO -> batsmanDAO.avg));
     }
 
     public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {
-        iplCricketorsRunList= CricketLeagueAdapter.loadCricketData(csvFilePath);
+        iplCricketorsRunList = CricketLeagueAdapter.loadCricketData(csvFilePath);
         return iplCricketorsRunList.size();
     }
 
