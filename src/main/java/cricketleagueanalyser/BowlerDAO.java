@@ -17,7 +17,7 @@ public class BowlerDAO {
     public int inns;
 
     @CsvBindByName(column = "Ov", required = true)
-    public int over;
+    public double over;
 
     @CsvBindByName(column = "Runs", required = true)
     public int runs;
@@ -29,17 +29,17 @@ public class BowlerDAO {
     public int bestBowlingIn;
 
     @CsvBindByName(column = "Avg", required = true)
-    public String avg;
+    public double avg;
 
     @CsvBindByName(column = "Econ", required = true)
-    public Double economyRate;
+    public double economyRate;
 
     @CsvBindByName(column = "SR", required = true)
-    public String strikeRate;
+    public double strikeRate;
 
     @CsvBindByName(column = "4w", required = true)
-    public int fours;
+    public int fourWicket;
 
     @CsvBindByName(column = "5w", required = true)
-    public int sixes;
+    public int fiveWicket;
 }

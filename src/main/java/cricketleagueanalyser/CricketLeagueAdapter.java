@@ -8,15 +8,22 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class CricketLeagueAdapter {
 
-    public static List<BatsmanDAO> loadCricketData(String csvFilePath) throws CricketLeagueException {
-        List<BatsmanDAO> iplCricketorsRunList = null;
+    List<CricketDAO> iplCricketorsRunList = new ArrayList<>();
+
+    public <E> List<CricketDAO> loadCricketData(String csvFilePath ,Class <E> className) throws CricketLeagueException {
+
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            iplCricketorsRunList = csvBuilder.getListCSVFile(reader, BatsmanDAO.class);
+            List<E> iplCricketorsRunList1 = csvBuilder.getListCSVFile(reader, className);
+            StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
+                    .map(BatsmanDAO.class::cast)
+                    .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
             return iplCricketorsRunList;
         } catch (IOException e) {
             throw new CricketLeagueException(e.getMessage(),
