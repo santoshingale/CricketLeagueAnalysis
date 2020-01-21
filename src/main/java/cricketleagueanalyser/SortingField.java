@@ -8,7 +8,7 @@ public class SortingField {
     private HashMap<Field, Comparator<CricketDAO>> sortField = null;
 
     public enum Field {
-        AVEREGE, STRIKE_RATE, MAX_6S_4S, MAX_STIKE_6S_4S, GREAT_AVEREGE_STRIKE_RATE, MAX_RUN_AVERAGE, MAX_RUN, ECONOMY_RATE, MAX_4W_5W, MAX_STRIKE_4W_5W;
+        AVEREGE, STRIKE_RATE, MAX_6S_4S, MAX_STIKE_6S_4S, GREAT_AVEREGE_STRIKE_RATE, MAX_RUN_AVERAGE, MAX_RUN, ECONOMY_RATE, MAX_4W_5W, MAX_STRIKE_4W_5W, WICKET, WICKET_AVERAGE;
     }
 
     public SortingField() {
@@ -23,6 +23,9 @@ public class SortingField {
         this.sortField.put(Field.ECONOMY_RATE, Comparator.comparing(cricketDAO -> cricketDAO.economyRate));
         this.sortField.put(Field.MAX_4W_5W, Comparator.comparing(cricketDAO -> (cricketDAO.fourWicket * 4 + cricketDAO.fiveWicket * 5)));
         this.sortField.put(Field.MAX_STRIKE_4W_5W, sortField.get(Field.MAX_4W_5W).thenComparing(cricketDAO -> cricketDAO.strikeRate));
+        this.sortField.put(Field.WICKET, Comparator.comparing(cricketDAO -> cricketDAO.wicket));
+        this.sortField.put(Field.WICKET_AVERAGE, sortField.get(Field.WICKET).thenComparing(cricketDAO -> cricketDAO.avg));
+
     }
 
     public Comparator<CricketDAO> getSortingField(Field field) {

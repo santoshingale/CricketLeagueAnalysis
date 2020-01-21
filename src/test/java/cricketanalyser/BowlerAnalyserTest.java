@@ -89,4 +89,17 @@ public class BowlerAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPL2019Sheet_shouldReturnListOfBowlerByWicketsAndAverage() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.WICKET_AVERAGE);
+            Assert.assertEquals("Imran Tahir", topCricketorsAverageScorelist.get(0).player);
+            Assert.assertEquals("Shivam Dube", topCricketorsAverageScorelist.get(98).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
