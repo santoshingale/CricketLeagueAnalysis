@@ -24,12 +24,12 @@ public class CricketLeagueAdapter {
             if (className.getName().equals("cricketleagueanalyser.BatsmanDAO")) {
                 StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
                         .map(BatsmanDAO.class::cast)
-                        .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
+                        .forEach(cricketData -> iplCricketorsRunList.add(new CricketDAO(cricketData)));
                 return iplCricketorsRunList;
             } else if (className.getName().equals("cricketleagueanalyser.BowlerDAO")) {
                 StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
                         .map(BowlerDAO.class::cast)
-                        .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
+                        .forEach(cricketData -> iplCricketorsRunList.add(new CricketDAO(cricketData)));
                 return iplCricketorsRunList;
             }
         } catch (IOException e) {

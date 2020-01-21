@@ -18,7 +18,7 @@ public class BowlerAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListSize() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadBowlerCSVFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
             Assert.assertEquals(99, listSize);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
@@ -29,8 +29,8 @@ public class BowlerAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListOfBowlerByAverage() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadBowlerCSVFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
-            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.AVEREGE);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.AVEREGE);
             Assert.assertEquals("Krishnappa Gowtham", topCricketorsAverageScorelist.get(0).player);
             Assert.assertEquals("Shivam Dube", topCricketorsAverageScorelist.get(98).player);
         } catch (CricketLeagueException e) {
@@ -42,8 +42,8 @@ public class BowlerAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListOfBowlerByStrikeRate() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadBowlerCSVFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
-            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.STRIKE_RATE);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.STRIKE_RATE);
             Assert.assertEquals("Krishnappa Gowtham", topCricketorsAverageScorelist.get(0).player);
             Assert.assertEquals("Shivam Dube", topCricketorsAverageScorelist.get(98).player);
         } catch (CricketLeagueException e) {
@@ -55,8 +55,8 @@ public class BowlerAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListOfBowlerByEconomyRate() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadBowlerCSVFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
-            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.ECONOMY_RATE);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.ECONOMY_RATE);
             Assert.assertEquals("Ben Cutting", topCricketorsAverageScorelist.get(0).player);
             Assert.assertEquals("Shivam Dube", topCricketorsAverageScorelist.get(98).player);
         } catch (CricketLeagueException e) {
@@ -68,13 +68,12 @@ public class BowlerAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListOfBowlerByStrikeRateAnd4W5W() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadBowlerCSVFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
-            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedDataByDESCOrder(SortingField.Field.MAX_STRIKE_4W_5W);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
+            List<CricketDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.MAX_STRIKE_4W_5W);
             Assert.assertEquals("Lasith Malinga", topCricketorsAverageScorelist.get(0).player);
             Assert.assertEquals("Shivam Dube", topCricketorsAverageScorelist.get(98).player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }
     }
-
 }
