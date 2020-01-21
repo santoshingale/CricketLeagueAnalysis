@@ -12,13 +12,13 @@ public class CricketLeagueAnalyser {
         BATING,BAWLING
     }
 
-    public int loadCricketCSVFile(String csvFilePath) throws CricketLeagueException {
+    public int loadCricketCSVFile(BatingOrBowling batingOrBowling, String csvFilePath) throws CricketLeagueException {
         iplCricketorsRunList = new CricketLeagueAdapter().loadCricketData(csvFilePath,BatsmanDAO.class);
         System.out.println(iplCricketorsRunList.toString());
         return iplCricketorsRunList.size();
     }
 
-    public int loadBowlerCSVFile(String csvFilePath) throws CricketLeagueException {
+    public int loadBowlerCSVFile(BatingOrBowling batingOrBowling, String csvFilePath) throws CricketLeagueException {
         iplCricketorsRunList = new CricketLeagueAdapter().loadCricketData(csvFilePath,BowlerDAO.class);
         return iplCricketorsRunList.size();
     }
