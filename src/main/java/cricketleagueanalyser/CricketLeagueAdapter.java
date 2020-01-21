@@ -21,10 +21,17 @@ public class CricketLeagueAdapter {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             List<E> iplCricketorsRunList1 = csvBuilder.getListCSVFile(reader, className);
-            StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
-                    .map(BatsmanDAO.class::cast)
-                    .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
-            return iplCricketorsRunList;
+            if (className.getName().equals("cricketleagueanalyser.BatsmanDAO")) {
+                StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
+                        .map(BatsmanDAO.class::cast)
+                        .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
+                return iplCricketorsRunList;
+            } else if (className.getName().equals("cricketleagueanalyser.BowlerDAO")) {
+                StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
+                        .map(BowlerDAO.class::cast)
+                        .forEach(censusData -> iplCricketorsRunList.add(new CricketDAO(censusData)));
+                return iplCricketorsRunList;
+            }
         } catch (IOException e) {
             throw new CricketLeagueException(e.getMessage(),
                     CricketLeagueException.ExceptionType.FILE_PROBLEM);
