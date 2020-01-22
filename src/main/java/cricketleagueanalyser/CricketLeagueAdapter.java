@@ -11,14 +11,15 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.StreamSupport;
 
-public class CricketLeagueAdapter {
+public abstract class CricketLeagueAdapter {
 
     Map<String, CricketDAO> iplCricketorsMap = new HashMap<>();
 
-    public <E> Map<String,CricketDAO> loadCricketData(String csvFilePath ,Class <E> className) throws CricketLeagueException {
+    public abstract Map<String, CricketDAO> loadCricketData(Class<BatsmanDAO> batsmanDAOClass, String... csvFilePath) throws ClassCastException, CricketLeagueException;
+
+    public <E> Map<String,CricketDAO> loadCricketData(Class<E> className, String csvFilePath) throws CricketLeagueException {
 
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();

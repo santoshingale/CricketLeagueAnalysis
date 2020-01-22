@@ -16,7 +16,7 @@ public class CricketLeagueAnalyser {
         BATING, BAWLING
     }
 
-    public int loadCricketFile(BatingOrBowling batingOrBowling, String csvFilePath) throws CricketLeagueException {
+    public int loadCricketFile(BatingOrBowling batingOrBowling, String ... csvFilePath) throws CricketLeagueException {
         this.batingOrBowling = batingOrBowling;
         iplCricketorsMAP = CricketAdapterFactory.getCricketData(batingOrBowling, csvFilePath);
         return iplCricketorsMAP.size();

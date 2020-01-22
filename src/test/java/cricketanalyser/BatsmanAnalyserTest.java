@@ -9,7 +9,7 @@ import java.util.List;
 public class BatsmanAnalyserTest {
 
     private static final String IPL_2019_FACTSHEET_MOST_RUNS = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
-
+    private static final String IPL_2019_FACTSHEET_MOST_WKTS = "./src/test/resources/IPL2019FactsheetMostWkts.csv";
     @Test
     public void givenIPL2019Sheet_shouldReturnRecordsCount() {
         try {
@@ -25,7 +25,7 @@ public class BatsmanAnalyserTest {
     public void givenIPL2019Sheet_shouldReturnListOfBatsmanByAverage() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BATING, IPL_2019_FACTSHEET_MOST_RUNS);
+            int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BATING, IPL_2019_FACTSHEET_MOST_RUNS,IPL_2019_FACTSHEET_MOST_WKTS);
             List<BatsmanDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.AVEREGE);
             Assert.assertEquals(83.2, topCricketorsAverageScorelist.get(0).avg, 0);
             Assert.assertEquals(0, topCricketorsAverageScorelist.get(99).avg, 0);
@@ -54,7 +54,7 @@ public class BatsmanAnalyserTest {
             int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BATING, IPL_2019_FACTSHEET_MOST_RUNS);
             List<BatsmanDAO> cricketorsSixAndFourWiselist = cricketLeagueAnalyser.getSortedData(SortingField.Field.MAX_6S_4S);
             Assert.assertEquals("Andre Russell", cricketorsSixAndFourWiselist.get(0).player);
-            Assert.assertEquals("Shakib Al Hasan", cricketorsSixAndFourWiselist.get(99).player);
+            Assert.assertEquals("Tim Southe", cricketorsSixAndFourWiselist.get(99).player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }
