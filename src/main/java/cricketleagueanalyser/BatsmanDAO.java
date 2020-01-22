@@ -46,6 +46,26 @@ public class BatsmanDAO {
     @CsvBindByName(column = "6s", required = true)
     public int sixes;
 
+    public BatsmanDAO() {
+    }
+
+    public BatsmanDAO(int pos, String player, int mat, int inns, int notOut, int runs, String highScore, Double avg, int ballsFaced, Double strikeRate, int century, int halfCentury, int fours, int sixes) {
+        this.pos = pos;
+        this.player =player;
+        this.mat = mat;
+        this.inns = inns;
+        this.notOut = notOut;
+        this.runs = runs;
+        this.highScore = highScore;
+        this.avg = avg;
+        this.ballsFaced = ballsFaced;
+        this.strikeRate = strikeRate;
+        this.century = century;
+        this.halfCentury = halfCentury;
+        this.fours = fours;
+        this.sixes = sixes;
+    }
+
     @Override
     public String toString() {
         return "IPLRunsCSV{" +

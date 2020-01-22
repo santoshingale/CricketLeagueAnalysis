@@ -42,4 +42,43 @@ public class BowlerDAO {
 
     @CsvBindByName(column = "5w", required = true)
     public int fiveWicket;
+
+    public BowlerDAO() {
+    }
+
+    public BowlerDAO(int pos, String player, int mat, int inns, double over, int runs, int wicket, int bestBowlingIn, Double avg, double economyRate, Double strikeRate, int fourWicket, int fiveWicket) {
+
+        this.pos = pos;
+        this.player = player;
+        this.mat = mat;
+        this.inns = inns;
+        this.over = over;
+        this.runs = runs;
+        this.wicket = wicket;
+        this.bestBowlingIn = bestBowlingIn;
+        this.avg = avg;
+        this.economyRate = economyRate;
+        this.strikeRate = strikeRate;
+        this.fourWicket = fourWicket;
+        this.fiveWicket = fiveWicket;
+    }
+
+    @Override
+    public String toString() {
+        return "BowlerDAO{" +
+                "pos=" + pos +
+                ", player='" + player + '\'' +
+                ", mat=" + mat +
+                ", inns=" + inns +
+                ", over=" + over +
+                ", runs=" + runs +
+                ", wicket=" + wicket +
+                ", bestBowlingIn=" + bestBowlingIn +
+                ", avg=" + avg +
+                ", economyRate=" + economyRate +
+                ", strikeRate=" + strikeRate +
+                ", fourWicket=" + fourWicket +
+                ", fiveWicket=" + fiveWicket +
+                '}';
+    }
 }

@@ -80,4 +80,10 @@ public class CricketDAO {
                 ", fiveWicket=" + fiveWicket +
                 '}';
     }
+
+    public Object getCensusDTO(CricketLeagueAnalyser.BatingOrBowling batingOrBowling) {
+        if (batingOrBowling.equals(CricketLeagueAnalyser.BatingOrBowling.BATING))
+            return new BatsmanDAO(pos, player, mat, inns, notOut, runs, highScore, avg, ballsFaced, strikeRate, century, halfCentury, fours, sixes);
+        return new BowlerDAO(pos, player, mat, inns, over, runs, wicket, bestBowlingIn, avg, economyRate, strikeRate, fourWicket, fiveWicket);
+    }
 }
