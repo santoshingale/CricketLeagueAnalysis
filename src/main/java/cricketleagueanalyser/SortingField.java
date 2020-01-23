@@ -29,7 +29,6 @@ public class SortingField {
         this.sortField.put(Field.WICKET, Comparator.comparing(cricketDAO -> cricketDAO.wicket));
         this.sortField.put(Field.WICKET_AVERAGE, sortField.get(Field.WICKET).thenComparing(cricketDAO -> cricketDAO.bowlingAverage));
         this.sortField.put(Field.BATING_BOWLING_AVERAGE, sortField.get(Field.BATING_AVEREGE).thenComparing(cricketDAO -> cricketDAO.bowlingAverage));
-
     }
 
     public Comparator<CricketDAO> getSortingField(Field field) {
