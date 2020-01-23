@@ -27,6 +27,9 @@ public abstract class CricketLeagueAdapter {
                 StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
                         .map(BatsmanDAO.class::cast)
                         .forEach(cricketData -> iplCricketorsMap.put(cricketData.player,new CricketDAO(cricketData)));
+                for (Map.Entry<String, CricketDAO> entry : iplCricketorsMap.entrySet()) {
+                    System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+                }
                 return iplCricketorsMap;
             } else if (className.getName().equals("cricketleagueanalyser.BowlerDAO")) {
                 StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)

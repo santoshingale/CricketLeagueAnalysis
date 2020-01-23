@@ -3,6 +3,7 @@ package cricketleagueanalyser;
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -29,10 +30,12 @@ public class BatsmanAdapter extends CricketLeagueAdapter {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             List<BowlerDAO> iplCricketorsbowlerList = csvBuilder.getListCSVFile(reader, BowlerDAO.class);
             StreamSupport.stream(iplCricketorsbowlerList.spliterator(), false)
-                    .filter(cricketData -> cricketDAOMap.get(cricketData.player) != null )
-                    .forEach(cricketData ->  {cricketDAOMap.get(cricketData.player)
-                            .bowlingAverage = cricketData.bowlingAverage;
-                            cricketDAOMap.get(cricketData.player).wicket = cricketData.wicket;});
+                    .filter(cricketData -> cricketDAOMap.get(cricketData.player) != null)
+                    .forEach(cricketData -> {
+                                cricketDAOMap.get(cricketData.player)
+                                .bowlingAverage = cricketData.bowlingAverage;
+                                cricketDAOMap.get(cricketData.player).wicket = cricketData.wicket;
+                    });
             return cricketDAOMap;
         } catch (IOException e) {
             throw new CricketLeagueException(e.getMessage(),
