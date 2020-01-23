@@ -26,7 +26,7 @@ public class BatsmanDAO {
     public String highScore;
 
     @CsvBindByName(column = "Avg", required = true)
-    public Double avg;
+    public Double batingAverage;
 
     @CsvBindByName(column = "BF", required = true)
     public int ballsFaced;
@@ -49,7 +49,7 @@ public class BatsmanDAO {
     public BatsmanDAO() {
     }
 
-    public BatsmanDAO(int pos, String player, int mat, int inns, int notOut, int runs, String highScore, Double avg, int ballsFaced, Double strikeRate, int century, int halfCentury, int fours, int sixes) {
+    public BatsmanDAO(int pos, String player, int mat, int inns, int notOut, int runs, String highScore, Double batingAverage, int ballsFaced, Double strikeRate, int century, int halfCentury, int fours, int sixes) {
         this.pos = pos;
         this.player =player;
         this.mat = mat;
@@ -57,7 +57,7 @@ public class BatsmanDAO {
         this.notOut = notOut;
         this.runs = runs;
         this.highScore = highScore;
-        this.avg = avg;
+        this.batingAverage = batingAverage;
         this.ballsFaced = ballsFaced;
         this.strikeRate = strikeRate;
         this.century = century;
@@ -68,21 +68,21 @@ public class BatsmanDAO {
 
     @Override
     public String toString() {
-        return "IPLRunsCSV{" +
+        return "BatsmanDAO{" +
                 "pos=" + pos +
                 ", player='" + player + '\'' +
                 ", mat=" + mat +
                 ", inns=" + inns +
                 ", notOut=" + notOut +
                 ", runs=" + runs +
-                ", highScore=" + highScore +
-                ", avg=" + avg +
+                ", highScore='" + highScore + '\'' +
+                ", batingAverage=" + batingAverage +
                 ", ballsFaced=" + ballsFaced +
                 ", strikeRate=" + strikeRate +
                 ", century=" + century +
                 ", halfCentury=" + halfCentury +
                 ", fours=" + fours +
-                ", sixs=" + sixes +
+                ", sixes=" + sixes +
                 '}';
     }
 }

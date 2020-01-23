@@ -29,7 +29,7 @@ public class BowlerDAO {
     public int bestBowlingIn;
 
     @CsvBindByName(column = "Avg", required = true)
-    public double avg;
+    public double bowlingAverage;
 
     @CsvBindByName(column = "Econ", required = true)
     public double economyRate;
@@ -46,7 +46,7 @@ public class BowlerDAO {
     public BowlerDAO() {
     }
 
-    public BowlerDAO(int pos, String player, int mat, int inns, double over, int runs, int wicket, int bestBowlingIn, Double avg, double economyRate, Double strikeRate, int fourWicket, int fiveWicket) {
+    public BowlerDAO(int pos, String player, int mat, int inns, double over, int runs, int wicket, int bestBowlingIn, Double bowlingAverage, double economyRate, Double strikeRate, int fourWicket, int fiveWicket) {
 
         this.pos = pos;
         this.player = player;
@@ -56,7 +56,7 @@ public class BowlerDAO {
         this.runs = runs;
         this.wicket = wicket;
         this.bestBowlingIn = bestBowlingIn;
-        this.avg = avg;
+        this.bowlingAverage = bowlingAverage;
         this.economyRate = economyRate;
         this.strikeRate = strikeRate;
         this.fourWicket = fourWicket;
@@ -74,7 +74,7 @@ public class BowlerDAO {
                 ", runs=" + runs +
                 ", wicket=" + wicket +
                 ", bestBowlingIn=" + bestBowlingIn +
-                ", avg=" + avg +
+                ", avg=" + bowlingAverage +
                 ", economyRate=" + economyRate +
                 ", strikeRate=" + strikeRate +
                 ", fourWicket=" + fourWicket +

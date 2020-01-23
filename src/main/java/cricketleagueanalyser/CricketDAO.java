@@ -8,9 +8,10 @@ public class CricketDAO {
     public int notOut;
     public int runs;
     public String highScore;
-    public Double avg;
+    public double batingAverage;
+    public double bowlingAverage;
     public int ballsFaced;
-    public Double strikeRate;
+    public double strikeRate;
     public int century;
     public int halfCentury;
     public int fours;
@@ -30,7 +31,7 @@ public class CricketDAO {
         this.notOut = batsmanDAO.notOut;
         this.runs = batsmanDAO.runs;
         this.highScore = batsmanDAO.highScore;
-        this.avg = batsmanDAO.avg;
+        this.batingAverage = batsmanDAO.batingAverage;
         this.ballsFaced = batsmanDAO.ballsFaced;
         this.strikeRate = batsmanDAO.strikeRate;
         this.century = batsmanDAO.century;
@@ -48,21 +49,22 @@ public class CricketDAO {
         this.runs = bowlerDAO.runs;
         this.wicket = bowlerDAO.wicket;
         this.bestBowlingIn = bowlerDAO.bestBowlingIn;
-        this.avg = bowlerDAO.avg;
+        this.bowlingAverage = bowlerDAO.bowlingAverage;
         this.economyRate = bowlerDAO.economyRate;
         this.strikeRate = bowlerDAO.strikeRate;
         this.fourWicket = bowlerDAO.fourWicket;
         this.fiveWicket = bowlerDAO.fiveWicket;
     }
 
-    public CricketDAO(CricketDAO cricketDAO, CricketDAO cricketData) {
-        cricketDAO.over=cricketData.over;
-        cricketDAO.wicket=cricketData.wicket;
-        cricketDAO.bestBowlingIn=cricketData.bestBowlingIn;
-        cricketDAO.economyRate=cricketData.economyRate;
-        cricketDAO.fourWicket=cricketData.fourWicket;
-        cricketDAO.fiveWicket=cricketData.fiveWicket;
+    public CricketDAO(CricketDAO cricketDAO, CricketDAO bowlerDAO) {
+        cricketDAO.over=bowlerDAO.over;
+        cricketDAO.wicket=bowlerDAO.wicket;
+        cricketDAO.bestBowlingIn=bowlerDAO.bestBowlingIn;
+        cricketDAO.economyRate=bowlerDAO.economyRate;
+        cricketDAO.fourWicket=bowlerDAO.fourWicket;
+        cricketDAO.fiveWicket=bowlerDAO.fiveWicket;
     }
+
 
     @Override
     public String toString() {
@@ -74,7 +76,8 @@ public class CricketDAO {
                 ", notOut=" + notOut +
                 ", runs=" + runs +
                 ", highScore='" + highScore + '\'' +
-                ", avg=" + avg +
+                ", batingAverage=" + batingAverage +
+                ", bowlingAverage=" + bowlingAverage +
                 ", ballsFaced=" + ballsFaced +
                 ", strikeRate=" + strikeRate +
                 ", century=" + century +
@@ -92,7 +95,7 @@ public class CricketDAO {
 
     public Object getCensusDTO(CricketLeagueAnalyser.BatingOrBowling batingOrBowling) {
         if (batingOrBowling.equals(CricketLeagueAnalyser.BatingOrBowling.BATING))
-            return new BatsmanDAO(pos, player, mat, inns, notOut, runs, highScore, avg, ballsFaced, strikeRate, century, halfCentury, fours, sixes);
-        return new BowlerDAO(pos, player, mat, inns, over, runs, wicket, bestBowlingIn, avg, economyRate, strikeRate, fourWicket, fiveWicket);
+            return new BatsmanDAO(pos, player, mat, inns, notOut, runs, highScore, batingAverage, ballsFaced, strikeRate, century, halfCentury, fours, sixes);
+        return new BowlerDAO(pos, player, mat, inns, over, runs, wicket, bestBowlingIn, bowlingAverage, economyRate, strikeRate, fourWicket, fiveWicket);
     }
 }

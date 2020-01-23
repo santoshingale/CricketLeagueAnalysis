@@ -3,7 +3,6 @@ package cricketleagueanalyser;
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ public abstract class CricketLeagueAdapter {
 
     Map<String, CricketDAO> iplCricketorsMap = new HashMap<>();
 
-    public abstract Map<String, CricketDAO> loadCricketData(Class<BatsmanDAO> batsmanDAOClass, String... csvFilePath) throws ClassCastException, CricketLeagueException;
+    public abstract Map<String, CricketDAO> loadCricketData(String... csvFilePath) throws ClassCastException, CricketLeagueException;
 
     public <E> Map<String,CricketDAO> loadCricketData(Class<E> className, String csvFilePath) throws CricketLeagueException {
 

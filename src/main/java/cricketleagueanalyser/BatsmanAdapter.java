@@ -3,38 +3,37 @@ package cricketleagueanalyser;
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
 public class BatsmanAdapter extends CricketLeagueAdapter {
-    Map<String, CricketDAO> cricketDAOMap = null;
+    Map<String, CricketDAO> cricketDAOMap = new HashMap<>();
 
     @Override
-    public Map<String, CricketDAO> loadCricketData(Class<BatsmanDAO> batsmanDAOClass, String... csvFilePath) throws ClassCastException, CricketLeagueException {
+    public Map<String, CricketDAO> loadCricketData(String... csvFilePath) throws ClassCastException, CricketLeagueException {
         cricketDAOMap = super.loadCricketData(BatsmanDAO.class, csvFilePath[0]);
         if (csvFilePath.length == 2) {
-            return loadBowlerData(BowlerDAO.class, csvFilePath[1]);
+            return loadBowlerData(csvFilePath[1]);
         }
         return cricketDAOMap;
     }
 
-    public <E> Map<String, CricketDAO> loadBowlerData(Class<E> className, String csvFilePath) throws CricketLeagueException {
-
+    public <E> Map<String, CricketDAO> loadBowlerData(String csvFilePath) throws CricketLeagueException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            List<E> iplCricketorsRunList1 = csvBuilder.getListCSVFile(reader, className);
-            StreamSupport.stream(iplCricketorsRunList1.spliterator(), false)
-                    .map(CricketDAO.class::cast)
-                    .filter(cricketData -> cricketDAOMap.get(cricketData) != null)
-                    .forEach(cricketData -> cricketData = new CricketDAO(iplCricketorsMap.get(cricketData), cricketData));
-
-            return iplCricketorsMap;
+            List<BowlerDAO> iplCricketorsbowlerList = csvBuilder.getListCSVFile(reader, BowlerDAO.class);
+            StreamSupport.stream(iplCricketorsbowlerList.spliterator(), false)
+                    .filter(cricketData -> cricketDAOMap.get(cricketData.player) != null )
+                    .forEach(cricketData ->  {cricketDAOMap.get(cricketData.player)
+                            .bowlingAverage = cricketData.bowlingAverage;
+                            cricketDAOMap.get(cricketData.player).wicket = cricketData.wicket;});
+            return cricketDAOMap;
         } catch (IOException e) {
             throw new CricketLeagueException(e.getMessage(),
                     CricketLeagueException.ExceptionType.FILE_PROBLEM);

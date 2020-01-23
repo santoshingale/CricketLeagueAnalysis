@@ -3,9 +3,7 @@ package cricketanalyser;
 import cricketleagueanalyser.*;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.List;
-
 
 public class BowlerAnalyserTest {
 
@@ -27,7 +25,7 @@ public class BowlerAnalyserTest {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BAWLING, IPL_2019_FACTSHEET_MOST_WKTS);
-            List<BowlerDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.AVEREGE);
+            List<BowlerDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.BOWLING_AVERAGE);
             Assert.assertEquals("Krishnappa Gowtham", topCricketorsAverageScorelist.get(0).player);
             Assert.assertEquals("Suresh Raina", topCricketorsAverageScorelist.get(98).player);
         } catch (CricketLeagueException e) {
