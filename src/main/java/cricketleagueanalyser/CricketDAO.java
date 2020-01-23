@@ -56,16 +56,6 @@ public class CricketDAO {
         this.fiveWicket = bowlerDAO.fiveWicket;
     }
 
-    public CricketDAO(CricketDAO cricketDAO, CricketDAO bowlerDAO) {
-        cricketDAO.over=bowlerDAO.over;
-        cricketDAO.wicket=bowlerDAO.wicket;
-        cricketDAO.bestBowlingIn=bowlerDAO.bestBowlingIn;
-        cricketDAO.economyRate=bowlerDAO.economyRate;
-        cricketDAO.fourWicket=bowlerDAO.fourWicket;
-        cricketDAO.fiveWicket=bowlerDAO.fiveWicket;
-    }
-
-
     @Override
     public String toString() {
         return "CricketDAO{" +

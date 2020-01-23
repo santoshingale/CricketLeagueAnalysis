@@ -8,7 +8,7 @@ public class SortingField {
     private HashMap<Field, Comparator<CricketDAO>> sortField = null;
 
     public enum Field {
-        BATING_AVEREGE,BOWLING_AVERAGE, STRIKE_RATE, MAX_6S_4S, MAX_STIKE_6S_4S, GREAT_AVEREGE_STRIKE_RATE, MAX_RUN_AVERAGE, MAX_RUN, ECONOMY_RATE, MAX_4W_5W, MAX_STRIKE_4W_5W, WICKET, WICKET_AVERAGE, GREAT_BOWLING_AVEREGE_STRIKE_RATE, BATING_BOWLING_AVERAGE;
+        BATING_AVEREGE, BOWLING_AVERAGE, STRIKE_RATE, MAX_6S_4S, MAX_STIKE_6S_4S, GREAT_AVEREGE_STRIKE_RATE, MAX_RUN_AVERAGE, MAX_RUN, ECONOMY_RATE, MAX_4W_5W, MAX_STRIKE_4W_5W, WICKET, WICKET_AVERAGE, GREAT_BOWLING_AVEREGE_STRIKE_RATE, BATING_BOWLING_AVERAGE, ALL_ROUNDER;
     }
 
     public SortingField() {
@@ -29,6 +29,11 @@ public class SortingField {
         this.sortField.put(Field.WICKET, Comparator.comparing(cricketDAO -> cricketDAO.wicket));
         this.sortField.put(Field.WICKET_AVERAGE, sortField.get(Field.WICKET).thenComparing(cricketDAO -> cricketDAO.bowlingAverage));
         this.sortField.put(Field.BATING_BOWLING_AVERAGE, sortField.get(Field.BATING_AVEREGE).thenComparing(cricketDAO -> cricketDAO.bowlingAverage));
+        this.sortField.put(Field.ALL_ROUNDER, Comparator.comparing(cricketDAO -> {
+            if (cricketDAO.wicket > 7 && cricketDAO.runs > 150)
+                return cricketDAO.runs + (cricketDAO.wicket * 20);
+            return  0;
+        }));
     }
 
     public Comparator<CricketDAO> getSortingField(Field field) {

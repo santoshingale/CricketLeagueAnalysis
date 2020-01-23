@@ -22,4 +22,17 @@ public class BatingBowlingAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenBatsmanBowlerAheet_shouldReturnListByAllRounderPlayer() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BATING, IPL_2019_FACTSHEET_MOST_RUNS,IPL_2019_FACTSHEET_MOST_WKTS);
+            List<BatsmanDAO> topCricketorsAverageScorelist = cricketLeagueAnalyser.getSortedData(SortingField.Field.ALL_ROUNDER);
+            Assert.assertEquals("Andre Russell", topCricketorsAverageScorelist.get(0).player);
+            Assert.assertEquals("Marcus Stoinis", topCricketorsAverageScorelist.get(99).player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
