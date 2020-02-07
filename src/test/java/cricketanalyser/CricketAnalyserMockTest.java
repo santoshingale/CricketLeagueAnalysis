@@ -2,25 +2,16 @@ package cricketanalyser;
 
 
 import cricketleagueanalyser.*;
-import csvbuilder.CSVBuilderFactory;
-import csvbuilder.OpenCSVBuilder;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.testng.PowerMockTestCase;
-
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CricketAdapterFactory.class)
@@ -39,7 +30,6 @@ public class CricketAnalyserMockTest extends PowerMockTestCase {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
             int listSize = cricketLeagueAnalyser.loadCricketFile(CricketLeagueAnalyser.BatingOrBowling.BATING, IPL_2019_FACTSHEET_MOST_RUNS);
             System.out.println(listSize);
-
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }
