@@ -22,7 +22,6 @@ public class CricketLeagueAnalyser {
         return iplCricketorsMAP.size();
     }
 
-
     public List getSortedData(SortingField.Field fieldSortingField) {
         List iplCricketorsList = iplCricketorsMAP.values().stream()
                 .sorted(new SortingField().getSortingField(fieldSortingField))
