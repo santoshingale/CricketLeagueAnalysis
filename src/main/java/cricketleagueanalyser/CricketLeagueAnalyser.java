@@ -10,7 +10,7 @@ public class CricketLeagueAnalyser {
 
     private BatingOrBowling batingOrBowling;
 
-    Map<String, CricketDAO> iplCricketorsMAP = new HashMap<>();
+    public Map<String, CricketDAO> iplCricketorsMAP = new HashMap<>();
 
     public enum BatingOrBowling {
         BATING, BAWLING
